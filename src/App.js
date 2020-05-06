@@ -1,5 +1,7 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import Start from "./Start";
+import AppBar from "./AppBar";
 
 const GlobalStyles = createGlobalStyle`
   html {
@@ -17,21 +19,30 @@ const GlobalStyles = createGlobalStyle`
   body {
     box-sizing: border-box;
     height: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: 'Source Code Pro', monospace;
     text-align: center;
+    letter-spacing: 0.2rem;
+  }
+
+  #root {
+    height: 100vh;
   }
 `;
 
-const TestTitle = styled.h1`
-  margin: 2rem;
-  font-size: 2.5rem;
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 `;
 
 const App = () => (
-  <>
-    <TestTitle>Test</TestTitle>
+  <Container>
+    <AppBar />
+    <Start />
     <GlobalStyles />
-  </>
+  </Container>
 );
 
 export default App;
