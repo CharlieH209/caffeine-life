@@ -1,10 +1,33 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import UserForm from "./UserForm";
+
+const Typing = keyframes`
+  from { width: 0 }
+  to { 
+    width: 100%; 
+    visibility: visible; 
+  }
+`;
+
+const FadeIn = keyframes`
+  0%   { opacity: 0; }
+  100% { opacity: 0.9; }
+`;
 
 const WelcomeText = styled.p`
   font-size: 2.2rem;
-  margin: 3.5rem;
+  white-space: nowrap;
+  animation: ${Typing} 1.75s steps(40, end);
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 2rem 1rem 2rem 1rem;
+`;
+
+const PressStart = styled(WelcomeText)`
+  animation-delay: 1.75s;
+  visibility: hidden;
+  animation-fill-mode: forwards;
 `;
 
 const Container = styled.div`
@@ -23,7 +46,9 @@ const StartButton = styled.button`
   color: black;
   border: 1px solid #d8d8d8;
   cursor: pointer;
-  opacity: 0.9;
+  opacity: 0;
+  margin: 1rem;
+  animation: ${FadeIn} 1.75s 2s forwards;
 
   &:hover {
     transform: translateY(-3px);
@@ -63,7 +88,7 @@ const Start = () => {
   return (
     <Container>
       <WelcomeText>Welcome to Caffeine Calculator!</WelcomeText>
-      <WelcomeText>Press start to begin...</WelcomeText>
+      <PressStart>Press start to begin...</PressStart>
       <StartButton onClick={() => setStart(true)}>Start</StartButton>
     </Container>
   );

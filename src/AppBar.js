@@ -1,15 +1,25 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Coffee } from "@styled-icons/feather/Coffee";
+
+const Typing = keyframes`
+  from { max-width: 0 }
+  to { 
+    max-width: 69%; 
+  }
+`;
 
 const Title = styled.h2`
   font-size: 2.5rem;
   float: left;
   display: inline-block;
-  max-width: 49%;
+  max-width: 69%;
   vertical-align: middle;
   margin: 1.5rem;
   font-weight: normal;
+  white-space: nowrap;
+  animation: ${Typing} 3s steps(40, end);
+  overflow: hidden;
 `;
 
 const Container = styled.div`
@@ -26,7 +36,7 @@ const CoffeeIcon = styled(Coffee)`
   width: 4rem;
   float: left;
   display: inline-block;
-  max-width: 49%;
+  max-width: 29%;
   vertical-align: middle;
   margin: 1rem;
 `;
