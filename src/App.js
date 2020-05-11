@@ -23,26 +23,26 @@ const GlobalStyles = createGlobalStyle`
     text-align: center;
     letter-spacing: 0.2rem;
   }
-
-  #root {
-    height: 100vh;
-  }
 `;
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100%;
   width: 100%;
+  min-height: 90vh;
 `;
 
 const App = () => (
-  <Container>
+  <>
     <AppBar />
-    <Start />
+    <Container>
+      <Start />
+    </Container>
     <GlobalStyles />
-  </Container>
+  </>
 );
 
 export default App;

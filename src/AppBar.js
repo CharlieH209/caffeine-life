@@ -23,11 +23,12 @@ const Title = styled.h2`
 `;
 
 const Container = styled.div`
-  position: absolute;
+  position: sticky;
   top: 0;
-  left: 0;
+  z-index: 100;
   width: 100%;
   border-bottom: 0.1rem solid #d8d8d8;
+  height: 6rem;
 `;
 
 const CoffeeIcon = styled(Coffee)`
@@ -41,11 +42,11 @@ const CoffeeIcon = styled(Coffee)`
   margin: 1rem;
 `;
 
-const Start = () => (
+const AppBar = () => (
   <Container>
     <CoffeeIcon />
     <Title>Caffeine Calculator</Title>
   </Container>
 );
 
-export default Start;
+export default AppBar;

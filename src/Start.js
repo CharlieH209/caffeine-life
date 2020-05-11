@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
-import UserForm from "./UserForm";
+import DrinkSelector from "./DrinkSelector";
 
 const Typing = keyframes`
   from { width: 0 }
@@ -83,7 +83,7 @@ const StartButton = styled.button`
 const Start = () => {
   const [start, setStart] = useState(false);
 
-  if (start) return <UserForm />;
+  if (start) return <DrinkSelector />;
 
   return (
     <Container>
