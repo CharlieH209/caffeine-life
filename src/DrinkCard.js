@@ -5,6 +5,7 @@ const Card = styled.div`
   height: 20rem;
   width: 20rem;
   border: 1px solid ${(props) => (props.active ? "red" : "#d8d8d8")};
+  cursor: pointer;
 `;
 
 const DrinkContainer = styled.div`
