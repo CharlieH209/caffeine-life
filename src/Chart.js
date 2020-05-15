@@ -4,13 +4,21 @@ import { Line, defaults } from "react-chartjs-2";
 
 defaults.global.defaultFontColor = "black";
 
-const ChartContainer = styled.div`
-  position: relative;
-  height: 60rem;
-  width: 120rem;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   border: 1px solid #d8d8d8;
   border-radius: 2px;
+  margin-top: 1.5rem;
   padding: 1rem;
+  height: 85rem;
+  width: 140rem;
+`;
+
+const ChartContainer = styled.div`
+  position: relative;
+  height: 100%;
+  width: 100%;
 `;
 
 const Chart = ({ caffeineTotal }) => {
@@ -24,24 +32,22 @@ const Chart = ({ caffeineTotal }) => {
 
     const today = new Date();
 
-    labels.push(today.getHours() + ":" + today.getMinutes());
+    labels.push(getFormattedDate(today));
 
     caffeineData.push(remainingCaffeine);
 
     while (remainingCaffeine > 1) {
       // N(t) = N_0 * (1/2) ^ (t / t_half)
-      const caffeine = remainingCaffeine * 0.5 ** (hours / 6);
+      const caffeine = Math.round(remainingCaffeine * 0.5 ** (hours / 6));
 
       hours++;
       today.setHours(today.getHours() + 1);
-      labels.push(today.getHours() + ":" + today.getMinutes());
+      labels.push(getFormattedDate(today));
       remainingCaffeine = caffeine;
 
       if (remainingCaffeine > 1) caffeineData.push(caffeine);
       else caffeineData.push(0);
     }
-    console.log(labels);
-    console.log(caffeineData);
 
     setData({
       labels: labels,
@@ -56,16 +62,23 @@ const Chart = ({ caffeineTotal }) => {
     });
   }, [caffeineTotal]);
 
+  const getFormattedDate = (today) =>
+    today.getMinutes() > 9
+      ? today.getHours() + ":" + today.getMinutes()
+      : today.getHours() + ":0" + today.getMinutes();
+
   return (
-    <ChartContainer>
-      <Line
-        data={data}
-        options={{
-          responsive: true,
-          maintainAspectRatio: true,
-        }}
-      />
-    </ChartContainer>
+    <Container>
+      <ChartContainer>
+        <Line
+          data={data}
+          options={{
+            responsive: true,
+            maintainAspectRatio: true,
+          }}
+        />
+      </ChartContainer>
+    </Container>
   );
 };
 

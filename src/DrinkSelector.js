@@ -35,6 +35,8 @@ const SubmitContainer = styled.button`
 `;
 
 const FormContainer = styled.form`
+  height: 85rem;
+  width: 140rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,8 +44,7 @@ const FormContainer = styled.form`
   border: 1px solid #d8d8d8;
   flex-direction: column;
   border-radius: 2px;
-  height: auto;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 `;
 
 const CaffeineContainer = styled.div`
