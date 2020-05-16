@@ -18,14 +18,14 @@ const FadeIn = keyframes`
 const WelcomeText = styled.p`
   font-size: 2.2rem;
   white-space: nowrap;
-  animation: ${Typing} 1.75s steps(40, end);
+  animation: ${Typing} 1.5s steps(40, end);
   overflow: hidden;
   margin: 0 auto;
   padding: 2rem 1rem 2rem 1rem;
 `;
 
 const PressStart = styled(WelcomeText)`
-  animation-delay: 1.75s;
+  animation-delay: 1.5s;
   visibility: hidden;
   animation-fill-mode: forwards;
 `;
@@ -48,7 +48,7 @@ const StartButton = styled.button`
   cursor: pointer;
   opacity: 0;
   margin: 1rem;
-  animation: ${FadeIn} 1.75s 2s forwards;
+  animation: ${FadeIn} 1.5s 2s forwards;
 
   &:hover {
     transform: translateY(-3px);

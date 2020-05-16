@@ -2,20 +2,37 @@ import React from "react";
 import styled from "styled-components";
 
 const Card = styled.div`
-  height: 20rem;
+  height: 25rem;
   width: 20rem;
-  border: 1px solid ${(props) => (props.active ? "red" : "#d8d8d8")};
+  border: 0.3rem solid ${(props) => (props.active ? "#42f560" : null)};
+  border: ${(props) => !props.active && "none"};
+  border-radius: 2px;
   cursor: pointer;
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const DrinkContainer = styled.div`
-  height: 15rem;
-  margin-bottom: 1rem;
+  height: 20rem;
 `;
 
 const Drink = styled.img`
   height: 100%;
-  width: auto;
+  width: 100%;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -24,9 +41,11 @@ const Drink = styled.img`
 
 const DrinkTitle = styled.p`
   font-size: 1.4rem;
-  width: 20rem;
-  padding-bottom: 2rem;
-  margin-bottom: 1rem;
+  margin: 0.2rem 0rem;
+`;
+
+const DrinkSize = styled.p`
+  font-size: 1.4rem;
 `;
 
 function DrinkCard({ src, name, size, caffeine, id, active, onClick }) {
@@ -35,9 +54,8 @@ function DrinkCard({ src, name, size, caffeine, id, active, onClick }) {
       <DrinkContainer>
         <Drink src={src} />
       </DrinkContainer>
-      <DrinkTitle>
-        {name} ({size}ml)
-      </DrinkTitle>
+      <DrinkTitle>{name}</DrinkTitle>
+      <DrinkSize>({size}ml)</DrinkSize>
     </Card>
   );
 }

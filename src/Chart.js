@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Line, defaults } from "react-chartjs-2";
+import { ChevronLeft } from "@styled-icons/boxicons-solid/ChevronLeft";
 
 defaults.global.defaultFontColor = "black";
 
@@ -10,18 +11,52 @@ const Container = styled.div`
   border: 1px solid #d8d8d8;
   border-radius: 2px;
   margin-top: 1.5rem;
-  padding: 1rem;
-  height: 85rem;
+  padding: 2.5rem;
+  height: 75rem;
   width: 140rem;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
 `;
 
 const ChartContainer = styled.div`
   position: relative;
-  height: 100%;
-  width: 100%;
+  max-height: 40rem;
+  width: 92.5%;
 `;
 
-const Chart = ({ caffeineTotal }) => {
+const IconContainer = styled.button`
+  background: none;
+  padding: 0px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-3px);
+
+    &::after {
+      transform: translateY(-3px);
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+`;
+
+const BackIcon = styled(ChevronLeft)`
+  fill: #d8d8d8;
+  height: 7.5rem;
+  width: 7.5rem;
+  display: block;
+
+  &:hover {
+    fill: #42f560;
+  }
+`;
+
+const Chart = ({ caffeineTotal, handleRestart }) => {
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -78,6 +113,9 @@ const Chart = ({ caffeineTotal }) => {
           }}
         />
       </ChartContainer>
+      <IconContainer>
+        <BackIcon onClick={handleRestart} type="submit" />
+      </IconContainer>
     </Container>
   );
 };
