@@ -6,6 +6,7 @@ import AppBar from "./AppBar";
 const GlobalStyles = createGlobalStyle`
   html {
     font-size: 62.5%;
+    background-color: #f8f9fa;
   }
 
   *,

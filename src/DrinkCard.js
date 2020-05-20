@@ -4,15 +4,22 @@ import styled from "styled-components";
 const Card = styled.div`
   height: 25rem;
   width: 20rem;
-  border: 0.3rem solid ${(props) => (props.active ? "#42f560" : null)};
-  border: ${(props) => !props.active && "none"};
+  //border: 0.3rem solid ${(props) => (props.active ? "#42f560" : null)};
+  //border: ${(props) => !props.active && "none"};
+  border: none;
   border-radius: 2px;
   cursor: pointer;
-  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
+  box-shadow: ${(props) =>
+    props.active
+      ? "inset 0px 0.5rem 1rem rgba(0, 0, 0, 0.2);"
+      : "0 1rem 1rem rgba(0, 0, 0, 0.2);"}
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+    box-shadow: ${(props) =>
+      props.active
+        ? "inset 0px 0.5rem 1rem rgba(0, 0, 0, 0.2);"
+        : "0 1rem 1rem rgba(0, 0, 0, 0.2);"}
 
     &::after {
       transform: scaleX(1.4) scaleY(1.6);
@@ -22,7 +29,8 @@ const Card = styled.div`
 
   &:active {
     transform: translateY(1px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    //box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0px 0.5rem 1rem rgba(0, 0, 0, 0.2);
   }
 `;
 

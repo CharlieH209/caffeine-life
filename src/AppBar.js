@@ -29,6 +29,7 @@ const Container = styled.div`
   width: 100%;
   border-bottom: 0.1rem solid #d8d8d8;
   height: 6rem;
+  background-color: white;
 `;
 
 const CoffeeIcon = styled(Coffee)`

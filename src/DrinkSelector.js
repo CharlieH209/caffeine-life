@@ -14,7 +14,7 @@ const Typing = keyframes`
 
 const FadeIn = keyframes`
   0%   { opacity: 0; }
-  100% { opacity: 0.9; }
+  100% { opacity: 1; }
 `;
 
 const FormTitle = styled.p`
@@ -23,7 +23,7 @@ const FormTitle = styled.p`
   white-space: nowrap;
 
   &.initial-run {
-    animation: ${Typing} 1.75s steps(40, end);
+    animation: ${Typing} 2s steps(40, end);
   }
 
   overflow: hidden;
@@ -33,7 +33,7 @@ const NextIcon = styled(ChevronRight)`
   fill: #d8d8d8;
   height: 7.5rem;
   width: 7.5rem;
-
+  ${(props) => !props.active && "visibility: hidden;"}
   &:hover {
     fill: ${(props) => (props.active ? "#42f560" : "#d8d8d8")};
   }
@@ -70,6 +70,7 @@ const FormContainer = styled.form`
   flex-direction: column;
   border-radius: 2px;
   margin-top: 1.5rem;
+  background-color: white;
 
   &.initial-run {
     animation: ${FadeIn} 2s forwards;

@@ -12,7 +12,7 @@ const Typing = keyframes`
 
 const FadeIn = keyframes`
   0%   { opacity: 0; }
-  100% { opacity: 0.9; }
+  100% { opacity: 1; }
 `;
 
 const WelcomeText = styled.p`
@@ -32,6 +32,12 @@ const PressStart = styled(WelcomeText)`
 
 const Container = styled.div`
   margin-bottom: 10rem;
+  border-bottom: 0.1rem solid #d8d8d8;
+  background-color: white;
+  border-radius: 2px;
+  padding: 4rem;
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
+  animation: ${FadeIn} 1.5s forwards;
 `;
 
 const StartButton = styled.button`
