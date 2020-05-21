@@ -63,20 +63,14 @@ const SubmitContainer = styled.button`
 const FormContainer = styled.form`
   height: 75rem;
   width: 140rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid #d8d8d8;
-  flex-direction: column;
-  border-radius: 2px;
   margin-top: 1.5rem;
-  background-color: white;
+  background-color: transparent;
 
   &.initial-run {
     animation: ${FadeIn} 2s forwards;
   }
 
-  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
+  perspective: 100rem;
 `;
 
 const CaffeineContainer = styled.div`
@@ -84,6 +78,38 @@ const CaffeineContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   margin: 1rem 2.5rem;
   grid-gap: 2.5rem;
+`;
+
+const FlipInner = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  background-color: white;
+
+  &.show-chart {
+    transform: rotateY(180deg);
+  }
+
+  border: 1px solid #d8d8d8;
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+`;
+
+const FlipSide = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+`;
+
+const FlipSideBack = styled(FlipSide)`
+  transform: rotateY(180deg);
 `;
 
 function DrinkSelector() {
@@ -98,7 +124,10 @@ function DrinkSelector() {
     caffeineTotal > 0 && setShowChart(true);
   };
 
-  const handleRestart = () => setShowChart(false);
+  const handleRestart = (e) => {
+    e.preventDefault();
+    setShowChart(false);
+  };
 
   const handleSelect = (id, caffeine, size) => {
     let newDrinks = [...drinks];
@@ -112,37 +141,40 @@ function DrinkSelector() {
     setCaffeineTotal(Math.round(caffeine * (size / 100)));
   };
 
-  if (showChart)
-    return (
-      <Chart caffeineTotal={caffeineTotal} handleRestart={handleRestart} />
-    );
-
   return (
     <FormContainer
       onSubmit={handleSubmit}
       className={intitalAnimate && "initial-run"}
     >
-      <FormTitle className={intitalAnimate && "initial-run"}>
-        Please select a drink.
-      </FormTitle>
-      <CaffeineContainer>
-        {drinks &&
-          drinks.map((d) => (
-            <DrinkCard
-              src={d.src}
-              name={d.name}
-              size={d.size}
-              caffeine={d.caffeine}
-              id={d.id}
-              key={d.id}
-              active={d.active}
-              onClick={handleSelect}
-            />
-          ))}
-      </CaffeineContainer>
-      <SubmitContainer type="submit" active={caffeineTotal > 0}>
-        <NextIcon type="submit" active={caffeineTotal > 0} />
-      </SubmitContainer>
+      <FlipInner className={showChart && "show-chart"}>
+        <FlipSide>
+          <FormTitle className={intitalAnimate && "initial-run"}>
+            Please select a drink.
+          </FormTitle>
+          <CaffeineContainer>
+            {drinks &&
+              drinks.map((d) => (
+                <DrinkCard
+                  src={d.src}
+                  name={d.name}
+                  size={d.size}
+                  caffeine={d.caffeine}
+                  id={d.id}
+                  key={d.id}
+                  active={d.active}
+                  onClick={handleSelect}
+                />
+              ))}
+          </CaffeineContainer>
+          <SubmitContainer type="submit" active={caffeineTotal > 0}>
+            <NextIcon type="submit" active={caffeineTotal > 0} />
+          </SubmitContainer>
+        </FlipSide>
+
+        <FlipSideBack>
+          <Chart caffeineTotal={caffeineTotal} handleRestart={handleRestart} />{" "}
+        </FlipSideBack>
+      </FlipInner>
     </FormContainer>
   );
 }

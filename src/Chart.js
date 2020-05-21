@@ -5,25 +5,11 @@ import { ChevronLeft } from "@styled-icons/boxicons-solid/ChevronLeft";
 
 defaults.global.defaultFontColor = "black";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #d8d8d8;
-  border-radius: 2px;
-  margin-top: 1.5rem;
-  padding: 2.5rem;
-  height: 75rem;
-  width: 140rem;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
-  background-color: white;
-`;
-
 const ChartContainer = styled.div`
   position: relative;
   max-height: 40rem;
   width: 92.5%;
+  padding: 1rem;
 `;
 
 const IconContainer = styled.button`
@@ -31,6 +17,7 @@ const IconContainer = styled.button`
   padding: 0px;
   border: none;
   cursor: pointer;
+  margin-bottom: 2rem;
 
   &:hover {
     transform: translateY(-3px);
@@ -58,7 +45,7 @@ const BackIcon = styled(ChevronLeft)`
 `;
 
 const Chart = ({ caffeineTotal, handleRestart }) => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     let remainingCaffeine = caffeineTotal;
@@ -103,8 +90,10 @@ const Chart = ({ caffeineTotal, handleRestart }) => {
       ? today.getHours() + ":" + today.getMinutes()
       : today.getHours() + ":0" + today.getMinutes();
 
+  if (!data) return null;
+
   return (
-    <Container>
+    <>
       <ChartContainer>
         <Line
           data={data}
@@ -115,9 +104,9 @@ const Chart = ({ caffeineTotal, handleRestart }) => {
         />
       </ChartContainer>
       <IconContainer>
-        <BackIcon onClick={handleRestart} type="submit" />
+        <BackIcon onClick={handleRestart} />
       </IconContainer>
-    </Container>
+    </>
   );
 };
 
